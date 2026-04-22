@@ -6,7 +6,7 @@
     <div class="text-white">
 
         <h1 class="display-3 fw-bold mb-3">
-            🌿 Greenhouse
+            Laguna Rincon
         </h1>
 
         <p class="lead mb-4">

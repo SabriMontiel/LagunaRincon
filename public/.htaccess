@@ -5,7 +5,7 @@ Options -Indexes
 	Options +FollowSymlinks
 	RewriteEngine On
 
-	RewriteBase /greenhouse/public/
+	RewriteBase /LagunaRincon/public/
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d

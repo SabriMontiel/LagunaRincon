@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Greenhouse</title>
+    <title>LagunaRincon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
@@ -13,7 +13,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
   <div class="container">
     <a class="navbar-brand fw-bold" href="<?= site_url('/') ?>">
-        🌿 Greenhouse
+        Laguna Rincon
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -27,7 +27,7 @@
 
             <li class="nav-item me-2">
                 <span class="nav-link text-light">
-                   👤 <?= session()->get('nombre') ?>
+                 <?= session()->get('nombre') ?>
                 </span>
             </li>
 
