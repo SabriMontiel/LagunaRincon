@@ -1,0 +1,12 @@
+/vendor/
+/node_modules/
+/writable/
+/.env
+/public/uploads/
+/tests/
+/system/
+
+*.log
+*.cache
+.DS_Store
+Thumbs.db
