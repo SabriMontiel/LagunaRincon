@@ -8,7 +8,7 @@ class Auth extends BaseController
     {
         return view('login');
     }
-    public function loginPost()
+    public function ValidarDatos()
     {
         $model = new UsuarioModel();
 
@@ -23,7 +23,7 @@ class Auth extends BaseController
            session()->set([
     'usuario_id' => $usuario['usuario_id'],
     'nombre' => $usuario['nombreCompleto']
-]);
+    ]);
             return redirect()->to('cabanas');
         } else {
             return redirect()->back()->with('error', 'Datos incorrectos o usuario no registrado');

@@ -12,7 +12,7 @@ $routes->post('reservar/guardar', 'Reserva::guardar');
 $routes->get('reservas', 'Reserva::misReservas');
 $routes->get('mis-reservas', 'Reserva::misReservas');
 $routes->get('login', 'Auth::login');
-$routes->post('login', 'Auth::loginPost');
+$routes->post('login', 'Auth::ValidarDatos');
 $routes->get('logout', 'Auth::logout');
 $routes->get('registro', 'Auth::registro');
 $routes->post('registro', 'Auth::guardarUsuario');
