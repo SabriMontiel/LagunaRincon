@@ -22,7 +22,9 @@ class Auth extends BaseController
         if ($usuario) {
            session()->set([
     'usuario_id' => $usuario['usuario_id'],
-    'nombre' => $usuario['nombreCompleto']
+    'nombre' => $usuario['nombre'],
+    'apellido' => $usuario['apellido'],
+    'email' => $usuario['email']    
     ]);
             return redirect()->to('cabanas');
         } else {
@@ -48,7 +50,8 @@ public function guardarUsuario()
     }
 
     $usuario_id = $model->insert([
-        'nombreCompleto' => $nombre, 
+        'nombre' => $nombre, 
+        'apellido' => $apellido,
         'telefono' => '',            
         'email' => $email,
         'contrasena' => $pass,

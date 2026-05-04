@@ -2,34 +2,60 @@
 
 namespace App\Controllers;
 
+use App\Models\CabanaModel;
+
 class Cabana extends BaseController
 {
-    public function index()
-    {
-      $data['cabanas'] = [
-    [
-        'id' => 1,
-        'nombre' => 'Cabaña Bosque',
-        'descripcion' => 'Rodeada de naturaleza, ideal para descansar.',
-        'precio' => 15000,
-        'imagen' => 'cabana1.jpg'
-    ],
-    [
-        'id' => 2,
-        'nombre' => 'Cabaña Lago',
-        'descripcion' => 'Vista al lago, perfecta para parejas.',
-        'precio' => 20000,
-        'imagen' => 'cabana2.jpg'
-    ],
-    [
-        'id' => 3,
-        'nombre' => 'Cabaña Montaña',
-        'descripcion' => 'Ubicada en altura con vista panorámica.',
-        'precio' => 18000,
-        'imagen' => 'cabana3.jpg'
-    ]
-];      
+    public function consultarCabanas()
+{
+    $model = new \App\Models\CabanaModel();
 
-        return view('cabanas', $data);
+    $fechaEntrada = $this->request->getGet('fechaEntrada');
+    $fechaSalida = $this->request->getGet('fechaSalida');
+
+    $cabanas = [];
+    $busco = false;
+
+    if ($fechaEntrada && $fechaSalida) {
+
+        $busco = true;
+
+        $cabanas = $model
+            ->select('cabanas.*, estado.estado_nombre, capacidad.capacidad_nombre')
+            ->join('estado', 'estado.estado_id = cabanas.estado_id')
+            ->join('capacidad', 'capacidad.capacidad_id = cabanas.capacidad_id')
+            ->where("cabanas.cabana_id NOT IN (
+                SELECT cabana_id FROM reservas 
+                WHERE fecha_entrada <= '$fechaSalida' 
+                AND fecha_salida >= '$fechaEntrada'
+            )")
+            ->findAll();
     }
+
+    return view('cabanas', [
+        'cabanas' => $cabanas,
+        'busco' => $busco
+    ]);
 }
+public function detallesCabana($id)
+{
+    $model = new \App\Models\CabanaModel();
+
+    $cabana = $model
+        ->select('cabanas.*, estado.estado_nombre, capacidad.capacidad_nombre')
+        ->join('estado', 'estado.estado_id = cabanas.estado_id')
+        ->join('capacidad', 'capacidad.capacidad_id = cabanas.capacidad_id')
+        ->find($id);
+
+    $fechaEntrada = $this->request->getGet('fechaEntrada');
+    $fechaSalida = $this->request->getGet('fechaSalida');
+
+    return view('detallesCabana', [
+        'cabana' => $cabana,
+        'fechaEntrada' => $fechaEntrada,
+        'fechaSalida' => $fechaSalida
+    ]);
+}
+
+}
+     
