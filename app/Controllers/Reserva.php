@@ -63,6 +63,18 @@ public function confirmarReserva()
 
     session()->set('reserva_temp', $data);
 
+    $model = new ReservaModel();
+
+$model->insert([
+    'fecha_entrada' => $data['fechaEntrada'],
+    'fecha_salida' => $data['fechaSalida'],
+    'cantHuesped' => $data['huespedes'],
+    'monto' => $data['monto'],
+    'usuario_id' => session()->get('usuario_id'),
+    'cabana_id' => $data['cabana'],
+    'mediosPago_id' => $data['medio_pago']
+]);
+
     return view('reserva_confirmacion', [
     'cabana' => $data['cabana'],
     'fechaEntrada' => $data['fechaEntrada'],
@@ -133,9 +145,10 @@ public function guardarReserva()
         }
 
         $reservas = $model
-            ->where('usuario_id', $usuario_id)
-            ->findAll();
-
+        ->select('reservas.*, cabanas.nombre as cabana_nombre')
+        ->join('cabanas', 'cabanas.cabana_id = reservas.cabana_id')
+        ->where('usuario_id', $usuario_id)
+        ->findAll();
         return view('mis_reservas', [
             'reservas' => $reservas
         ]);
@@ -161,7 +174,7 @@ public function confirmarCancelacion()
 
     $model = new ReservaModel();
 
-    $model->delete($id); // eliminación directa
+    $model->delete($id); 
 
     return redirect()->to('mis-reservas')
         ->with('success', 'Se ha cancelado la reserva');

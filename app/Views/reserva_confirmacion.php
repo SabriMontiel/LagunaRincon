@@ -23,17 +23,15 @@
         <form action="<?= site_url('reservar/guardar') ?>" method="post">
             <?= csrf_field() ?>
 
-            <!-- IMPORTANTE: enviar todos los datos -->
             <input type="hidden" name="cabana" value="<?= $cabana ?>">
             <input type="hidden" name="fechaEntrada" value="<?= $fechaEntrada ?>">
             <input type="hidden" name="fechaSalida" value="<?= $fechaSalida ?>">
             <input type="hidden" name="huespedes" value="<?= $huespedes ?>">
             <input type="hidden" name="medio_pago" value="<?= $medio_pago ?>">
 
-            <!-- ESTE ES EL BOTÓN CORRECTO -->
             <button type="submit" class="btn btn-success w-100">
         Confirmar reserva
-    </button>
+            </button>
         </form>
 
         <a href="<?= site_url('cabanas') ?>" class="btn btn-secondary w-100 mt-2">

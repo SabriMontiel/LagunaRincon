@@ -64,7 +64,7 @@
 
                     <td>
                         <span class="badge bg-primary">
-                            Cabaña #<?= $r['cabana_id'] ?>
+                            <?= $r['cabana_nombre'] ?>
                         </span>
                     </td>
 

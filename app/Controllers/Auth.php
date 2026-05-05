@@ -43,6 +43,7 @@ public function guardarUsuario()
 
     $email = $this->request->getPost('email');
     $nombre = $this->request->getPost('nombre');
+    $apellido = $this->request->getPost('apellido');
     $pass = $this->request->getPost('password');
 
     if ($model->where('email', $email)->first()) {
